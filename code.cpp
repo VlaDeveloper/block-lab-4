@@ -2,23 +2,23 @@
 #include <stdio.h>
 #include <stdlib.h>
  
-#define MASTER 0               // taskid мастера
+#define MASTER 0               // taskid РјР°СЃС‚РµСЂР°
 #define FROM_MASTER 1          
 #define FROM_WORKER 2          
  
 int main (int argc, char *argv[])
 { 
-const int NRA = 500;      //Количество строк в матрице А
-const int NCA = 250;  //Количество столбцов в матрице А
-const int NCB = 500;  //Количество столбцов в матрице Б
-int numtasks,              //Количество задач
- taskid,                //Идентификатор задачи
- numworkers,            //Количество рабочих процессов
- source,                //id сурца
- dest,                  //id приемника
- mtype,                 //тэг
- rows,                  //строки матрицы А для каждого рабочего процесса
- averow, extra, offset, //для определения строк в каждом воркере
+const int NRA = 500;      //РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕРє РІ РјР°С‚СЂРёС†Рµ Рђ
+const int NCA = 250;  //РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ РІ РјР°С‚СЂРёС†Рµ Рђ
+const int NCB = 500;  //РљРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ РІ РјР°С‚СЂРёС†Рµ Р‘
+int numtasks,              //РљРѕР»РёС‡РµСЃС‚РІРѕ Р·Р°РґР°С‡
+ taskid,                //РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂ Р·Р°РґР°С‡Рё
+ numworkers,            //РљРѕР»РёС‡РµСЃС‚РІРѕ СЂР°Р±РѕС‡РёС… РїСЂРѕС†РµСЃСЃРѕРІ
+ source,                //id СЃСѓСЂС†Р°
+ dest,                  //id РїСЂРёРµРјРЅРёРєР°
+ mtype,                 //С‚СЌРі
+ rows,                  //СЃС‚СЂРѕРєРё РјР°С‚СЂРёС†С‹ Рђ РґР»СЏ РєР°Р¶РґРѕРіРѕ СЂР°Р±РѕС‡РµРіРѕ РїСЂРѕС†РµСЃСЃР°
+ averow, extra, offset, //РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ СЃС‚СЂРѕРє РІ РєР°Р¶РґРѕРј РІРѕСЂРєРµСЂРµ
  i, j, k, rc;           
 double a[NRA][NCA],       
  b[NCA][NCB],           
@@ -50,7 +50,7 @@ numworkers = numtasks-1;
  
       double start = MPI_Wtime();
  
-      /* Отправляем данные матрицы воркерам */
+      /* РћС‚РїСЂР°РІР»СЏРµРј РґР°РЅРЅС‹Рµ РјР°С‚СЂРёС†С‹ РІРѕСЂРєРµСЂР°Рј */
       averow = NRA/numworkers;
       extra = NRA%numworkers;
       offset = 0;
@@ -66,7 +66,7 @@ numworkers = numtasks-1;
          offset = offset + rows;
       }
  
-      /* Получаем результаты */
+      /* РџРѕР»СѓС‡Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚С‹ */
       mtype = FROM_WORKER;
       for (i=1; i<=numworkers; i++)
       {
